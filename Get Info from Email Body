@@ -1,0 +1,15 @@
+trigger Get_Info_From_Description on Case (before insert) {
+    for(Case C:trigger.new){
+        if(C.Description!='' && C.Description.length()>0){
+            String data=C.Description;
+            C.Email__c=data.substringBetween('User email:', 'Request'); 
+            C.Help_Desk_Referral_URL__c=data.substringBetween('URL:', '1- What' );
+            C.Device__c=data.substringBetween('Device:', 'Browser' );
+            C.Browser__c=data.substringBetween('Browser:', 'OS:' );
+            C.Operating_System__c=data.substringBetween('OS:', 'URL:' );
+            C.What_do_you_need_help_with__c=data.substringBetween('1- What do you need help with?', 'Tell us more about your request' );
+            C.Tell_Us_More_About_Your_Request__c=data.substringAfter('Tell us more about your request');
+            // Add your other fields
+            }
+    }
+ }
