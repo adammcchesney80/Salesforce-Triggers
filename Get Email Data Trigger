@@ -1,0 +1,8 @@
+trigger Get_Email_HTML on EmailMessage (before insert) {
+    for(EmailMessage C:trigger.new){
+        if(C.HtmlBody!='' && C.HtmlBody.length()>0){
+            String data=C.HtmlBody;
+            C.Attachment_HTML__c=data.substringBetween('Download attachment</span><br clear="none" style="box-sizing:unset"><a href="', '" shape="rect" target="_blank" style="color:rgb(1,104,250);box-sizing:unset;text-decoration-line:none;background-color:transparent">Capture.PNG</a></td></tr></tbody></table></div>');
+            }
+    }
+ }
